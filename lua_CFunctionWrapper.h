@@ -20,7 +20,6 @@
 		static_assert(false, "not supported"); \
 }
 
-//TODO: throw exception if argument is wrong type or is not present
 #define lua_CFunctionWrapper_PopArg(TYPE, i)  \
 	TYPE a##i; \
 	if constexpr (std::is_same<TYPE, bool>::value) \
