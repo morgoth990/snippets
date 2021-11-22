@@ -14,22 +14,27 @@
 		lua_pushboolean(L, val); \
 	else if constexpr (std::is_same<decltype(val), std::string>::value) \
 		lua_pushstring(L, val.c_str()); \
+	else if constexpr (std::is_same<decltype(val), const char*>::value) \
+		lua_pushstring(L, val); \
 	else if constexpr (std::is_arithmetic<decltype(val)>::value) \
 		lua_pushnumber(L, val); \
 	else \
-		static_assert(false, "not supported"); \
+		static_assert(false, "type not supported"); \
 }
 
+//TODO: throw exception if argument is wrong type or is not present
 #define lua_CFunctionWrapper_PopArg(TYPE, i)  \
 	TYPE a##i; \
 	if constexpr (std::is_same<TYPE, bool>::value) \
 		a##i = luaL_checkboolean(L, i); \
 	else if constexpr (std::is_same<TYPE, std::string>::value) \
 		a##i = luaL_checkstring(L, i); \
+	else if constexpr (std::is_same<TYPE, const char*>::value) \
+		a##i = luaL_checkstring(L, i); \
 	else if constexpr (std::is_arithmetic<TYPE>::value) \
 		a##i = static_cast<TYPE>(luaL_checknumber(L, i)); \
 	else \
-		static_assert(false, "not supported"); \
+		static_assert(false, "type not supported"); \
 
 
 template<typename Sig, Sig& S>
