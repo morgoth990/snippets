@@ -7,8 +7,8 @@ Shader "UI/SelectionGizmo"
         _DashColor1("DashColor1", Color) = (1,1,1,1)
         _DashColor2("DashColor2", Color) = (0,0,0,1)
         _DashHeight("Dash Height", Float) = 2
-        _DashWidth("Dash Width", Float) = 5
-        _DashSpeed("Dash Speed", Float) = 2 
+        _DashWidth("Dash Width", Float) = 7
+        _DashSpeed("Dash Speed", Float) = 1.5 
 
         [HideInInspector]
         _StencilComp("Stencil Comparison", Float) = 8
